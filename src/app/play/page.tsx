@@ -1,26 +1,35 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { json } from "stream/consumers";
 
 export default function Home() {
   const [username, setUsername] = useState("");
   const [isRegistered, setIsRegistered] = useState(false);
 
   let questionCounter = 0;
+  //let IdsArray: String[] = [
+  //  "64c59a39b8254bc6706edf13",
+  //  "64c5d14391ae5a39586ee969",
+  //  "64c5d15891ae5a39586ee96f",
+  //  "64c5d17791ae5a39586ee975",
+  //];
 
-  const getAllIDs = async () => {
-    let IdsArray = [];
+  let idsArray: any[] = [];
 
-    try {
-      const response = await fetch(
-        "https://cs-fundamentals-quizapi.onrender.com/users",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    } catch (error) {}
+  const apiUrl = "https://cs-fundamentals-quizapi.onrender.com/questions/";
+
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      idsArray = data.map((item: any) => item._id);
+      console.log(idsArray[0]);
+    })
+    .catch((error) => console.error("Error fetching data:", error));
+
+  const showIds = () => {
+    const i = 0;
+
+    return <p>{idsArray[i]}</p>;
   };
 
   const handleInputChange = (e: any) => {
@@ -59,7 +68,6 @@ export default function Home() {
         <h2 className="text-xl">Time to</h2>
         <h1 className="text-6xl">Play!</h1>
       </div>
-
       <div>
         <h2>Register</h2>
         <h3>
@@ -75,16 +83,14 @@ export default function Home() {
         />
         <button onClick={handleRegister}>Register</button>
       </div>
-
       {isRegistered && (
         <section>
           <h3>Great, {username}!</h3>
           <p>You have been successfully registered.</p>
-
-          <h4>Question {questionCounter}</h4>
-          <h3></h3>
         </section>
       )}
+      <h4>Question {questionCounter}</h4>
+      ids new: {showIds()}
     </main>
   );
 }
