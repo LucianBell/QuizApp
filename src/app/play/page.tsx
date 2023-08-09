@@ -91,6 +91,11 @@ export default function Home() {
       )}
       <h4>Question {questionCounter}</h4>
       ids new: {showIds()}
+      <h4>Alternatives:</h4>
+      <p>Alternative 1</p>
+      <p>Alternative 2</p>
+      <p>Alternative 3</p>
+      <p>Alternative 4</p>
     </main>
   );
 }
