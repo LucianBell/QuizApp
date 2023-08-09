@@ -7,14 +7,7 @@ export default function Home() {
   const [isRegistered, setIsRegistered] = useState(false);
 
   let questionCounter = 0;
-  //let IdsArray: String[] = [
-  //  "64c59a39b8254bc6706edf13",
-  //  "64c5d14391ae5a39586ee969",
-  //  "64c5d15891ae5a39586ee96f",
-  //  "64c5d17791ae5a39586ee975",
-  //];
-
-  let idsArray: any[] = [];
+  let idsArray: String[] = [];
 
   const apiUrl = "https://cs-fundamentals-quizapi.onrender.com/questions/";
 
